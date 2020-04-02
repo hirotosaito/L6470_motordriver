@@ -7,6 +7,8 @@
 #define PIN_SPI_SCK 18
 #define PIN_SPI_SS1 5
 #define PIN_SPI_SS2 17
+
+char inChar; // Where to store the character read
  
 void setup()
 {
@@ -176,23 +178,28 @@ void L6470_STOP(void)
 //**********************************************
 void loop(){
 
-  L6470_FWRD();
-  delay(1604);
-  L6470_STOP();
-  delay(500);
-  
-  L6470_BACK();
-  delay(1604);
-  L6470_STOP();
-  delay(500);
-
-  L6470_TURNR();
-  delay(1604);
-  L6470_STOP();
-  delay(500);
-
-  L6470_TURNL();
-  delay(1604);
-  L6470_STOP();
-  delay(500);
+  while(Serial.available() > 0) // Don't read unless there you know there is data
+  {
+    inChar = Serial.read(); // Read a character
+    if(inChar == 102) // if the input char == "f"
+    {
+      L6470_FWRD();
+    }
+    else if(inChar == 98) // if the input char == "b"
+    {
+      L6470_BACK();
+    }
+    else if(inChar == 115) // if the input char == "s"
+    {
+      L6470_STOP();
+    }
+    else if(inChar == 114) // if the input char == "r"
+    {
+      L6470_TURNR();
+    }
+    else if(inChar == 108) // if the input char == "l"
+    {
+      L6470_TURNL();
+    }            
+  }
 }
