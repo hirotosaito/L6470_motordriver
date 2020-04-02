@@ -12,7 +12,7 @@ char inChar; // Where to store the character read
  
 void setup()
 {
-  delay(1000);
+  delay(100);
   Serial.begin(115200);
    
   //(3)ステッピングモーター用のピンの準備
