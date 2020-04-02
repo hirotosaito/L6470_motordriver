@@ -1,6 +1,12 @@
 #include <Arduino.h>
 #include <SPI.h>  //(1)SPI通信をするための読み込み
-#include "L6470.h"
+
+//(2)ステッピングモーター用のピンの定義
+#define PIN_SPI_MOSI 23
+#define PIN_SPI_MISO 19
+#define PIN_SPI_SCK 18
+#define PIN_SPI_SS1 5
+#define PIN_SPI_SS2 17
  
 void setup()
 {
@@ -169,7 +175,7 @@ void L6470_STOP(void)
 // (8)メイン処理 - loop()
 //**********************************************
 void loop(){
-  
+
   L6470_FWRD();
   delay(1604);
   L6470_STOP();
